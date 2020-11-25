@@ -46,7 +46,7 @@ body {
   }
   table td,
   table th {
-    color: #2b686e;
+    /* color: #2b686e; */
     padding: 10px;
   }
   table th {

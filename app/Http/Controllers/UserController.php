@@ -22,7 +22,7 @@ class UserController extends Controller
             'name' => 'bail|required|max:255',
             'email' => 'bail|required|email',
             'address' => 'bail|required|max:255',
-            'phone' => 'bail|required|min:10|max:10',
+            'phone' => 'bail|required|digits:10',
         ]);
     
         if ($validator->fails()) {
@@ -42,13 +42,13 @@ class UserController extends Controller
             'name' => 'bail|required|max:255',
             'email' => 'bail|required|email',
             'address' => 'bail|required|max:255',
-            'phone' => 'bail|required|min:10|max:10',
+            'phone' => 'bail|required|digits:10',
         ]);
-            
+        $user =  User::find($request->id);
         if ($validator->fails()) {
-            return back()->withInput()->with('user',$user);
+            return back()->withInput()->with('user',$user)->withErrors($validator);
         }
-        $user = User::find($request->id)->update($request->all());
+        $user->update($request->all());
         return \redirect('/index');
     }
 
